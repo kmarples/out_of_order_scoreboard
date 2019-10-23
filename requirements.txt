@@ -1,0 +1,27 @@
+Requirements
+
+* Decode a sequence of instructions
+* Provide a detailed list of pipeline hazards that exist
+* For each instruction keep data on
+ ** Number of cycles for each pipeline stage
+ ** Functional unit used
+ ** Read or write information
+* Scoreboard that updates every clock cycle; for all in flight instructions, must track:
+ ** Operations performed
+ ** Functional units used
+ ** Source and destination registers used
+ ** Flags indicating when registers are ready and not yet read (set to 0 after operands are read)
+
+ Implementation
+
+ * Enumeration for types of instructions
+ * Properties for each type of instruction giving information about the instruction type, such as:
+    ** How to "decode" --> instruction format
+    ** Number of cycles for each pipeline stage
+    ** Functional unit used
+    ** Read or write information
+ * Regex to "decode" operation, source/destination registers
+ * Class for each instruction in the sequence
+ * Command line display of scoreboard
+
+
