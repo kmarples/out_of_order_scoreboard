@@ -28,7 +28,7 @@ _op_dict = {
         }
     }
 
-class Instruction(object):
+class Instruction:
     """ This class carries the basic information for an input instruction 
 
         Attributes:
@@ -38,8 +38,13 @@ class Instruction(object):
     def __init__(self, inst):
         """ Creates an instance of Instruction 
 
-        Arguments:
-            inst (str): a raw string representing a single instruction
+        Attributes:
+            inst_str (str): A raw string representing a single instruction
+            op (str): Instruction operation from _op_dict
+            dst (str): Destination register
+            src (list(str)): Source registers
+            fu (str): Functional unit used
+            num_cycles (int): Number of cycles operation will take at execution stage
         """
 
         self.inst_str = inst.strip('\n')
@@ -56,15 +61,15 @@ class Instruction(object):
             raise KeyError("Error: Unknown instruction")
 
         if inst_fmt == 'IMM':       # Example: LD F6 34 R2
-            self.src = [inst_list[3]]
+            self.src = [inst_list[3], '-']
         else:                       # Example: ADD.D F2 F1 F3
             self.src = [inst_list[2], inst_list[3]]
 
         self.num_cycles = _op_dict[self.op]['ex_cycs']
         self.fu = _op_dict[self.op]['fu']
 
-    def __repr__(self):
-        return self.inst_str
+    def __str__(self):
+        return 'Instruction: {}'.format(self.inst_str)
 
 
     @classmethod

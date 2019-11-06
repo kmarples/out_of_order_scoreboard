@@ -24,4 +24,21 @@ Requirements
  * Class for each instruction in the sequence
  * Command line display of scoreboard
 
+ Scoreboard Algorithm
+
+ 1. Issue (fisrt portion of instruction decode)
+    * check if FU is available (struct hazards)
+    * no other active instruction has the same destination register (WAW hazards)
+    * Note: All instructions complete issue stage IN-ORDER
+2. Read Operands (second portion of instruction decode)
+    * monitor availabilty of source operands
+    * when available, scoreboard tells FU to read them and start execution (resolve RAW hazards dynamically)
+3. Execution
+    * begins when FU receives operands
+    * notify scoreboard when done
+4. Write Results
+   * once scoreboard knows that FU is done, checks for WAR hazards
+   * if none, then writes the results
+
+
 
